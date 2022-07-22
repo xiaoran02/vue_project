@@ -1,0 +1,79 @@
+<template>
+<!-- 容器 -->
+<div ref="charts" class="charts" width="280px" height="50px"></div>
+</template>
+
+<script>
+//引入echarts
+import * as echarts from 'echarts'
+export default {
+    mounted() {
+        //初始化echarts实例
+        let lineCharts = echarts.init(this.$refs.charts)
+
+        //配置数据
+        lineCharts.setOption({
+            xAxis:{
+                //隐藏轴线
+                show:false,
+                type:'category'
+            },
+            yAxis:{
+                show:false,
+            },
+            //系列
+            series:[
+                {
+                    type:'line',
+                    data:[10,7,33,12,88,9,77,12,23,4],
+                    //拐点的样式设置
+                    itemStyle:{
+                        opacity:0
+                    },
+                    //线条的样式
+                    lineStyle:{
+                        color:'purple',
+                    },
+                    //填充颜色的设置
+                    areaStyle:{
+                        color:{
+                            type:"linear",
+                            x:0,
+                            y:0,
+                            x2:0,
+                            y2:1,
+                            colorStops:[
+                                {
+                                    offset:0,
+                                    color:"purple"  //0%处的颜色
+                                },
+                                {
+                                    offset:0.6,
+                                    color:"white" //100%处的颜色
+                                },
+                            ],
+                            global:false,  //缺省为false
+                        }
+                    },
+                    smooth:true,
+                }
+            ],
+            //布局测试
+            grid:{
+                left:0,
+                top:0,
+                right:0,
+                bottom:0
+            }
+        })
+    },
+
+}
+</script>
+
+<style>
+.charts{
+    width: 100%;
+    height: 100%;
+}
+</style>
